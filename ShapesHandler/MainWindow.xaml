@@ -1,0 +1,39 @@
+﻿<Window x:Class="ShapesHandler.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Border BorderBrush="DarkBlue" BorderThickness="5,5,5,5" CornerRadius="2">
+        <StackPanel Name="mainStack">
+            <Border BorderBrush="DarkBlue" BorderThickness="5,5,5,5" CornerRadius="2">
+            <StackPanel Orientation="Horizontal" Height="30" Name="headerPanel">
+                <Button Content="Add"> </Button>
+                <Button Content="Edit"></Button>
+                <Button Content="Remove"></Button>
+                <Button Content="Save" HorizontalContentAlignment="Right"></Button>
+                </StackPanel>
+            </Border>
+            <Grid Name="corePanel">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border  BorderBrush="Green" BorderThickness="1,1,1,1">
+                    <Canvas Grid.Column="0" Width="400" Name="canvasField" Background="White"
+                            MouseLeftButtonDown="canvasField_MouseLeftButtonDown"
+                            MouseRightButtonDown="canvasField_MouseRightButtonDown">
+                        <ListBox Canvas.Left="0" Canvas.Top="0"  Panel.ZIndex="1" Background="White" Name= "shapeTypes" Width="80" Height="60">
+                            <ListBoxItem>Rectangle</ListBoxItem>
+                            <ListBoxItem>Circle</ListBoxItem>
+                        </ListBox>
+                </Canvas>
+                </Border>
+                <StackPanel Grid.Column="1"  Name="sideStack">
+                    <Border  BorderBrush="Green" BorderThickness="0,0,0,1">
+                    <Label Content="ShapeList" Width="Auto"/>
+                    </Border>
+                    <ListBox Name = "shapeList" Height="200"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>
