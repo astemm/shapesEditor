@@ -2,56 +2,55 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Threading;
 using System.Diagnostics;
-using System.ComponentModel;
+
 
 namespace ShapesHandler.Models
 {
-    public class Rectangle : CustomShape
+    public class Rhomb: CustomShape
     {
-
-        public Rectangle() {}
+        public Rhomb() {}
         
-        public Rectangle(string name, Point center, float width, float height)
+        public Rhomb(string name, Point center, float width, float height)
         {
             this.Name = name;
-            this.Type = ShapeType.Rectangle;
+            this.Type = ShapeType.Rhomb;
             this.Center = center;
             this.XLabel = (float)center.X;
             this.YLabel = (float)center.Y;
-            this.WidthC = (float)width;
-            this.HeightC = (float)height;
+            this.WidthC = (float)width; //first diagonale
+            this.HeightC = (float)height; //second diagonale
         }
 
         protected override Geometry DefiningGeometry
         {
             get
-            {
+            {   
                 return ShapePathGeometry();
             }
         }
 
-
         private Geometry ShapePathGeometry()
         {
-            Point pointTL = new Point(Center.X - WidthC / 2, Center.Y - HeightC / 2); //TopLeft
-            Point pointTR = new Point(Center.X + WidthC / 2, Center.Y - HeightC / 2);
-            Point pointBR = new Point(Center.X + WidthC / 2, Center.Y + HeightC / 2);
-            Point pointBL = new Point(Center.X - WidthC / 2, Center.Y + HeightC / 2);
+            Point pointL = new Point(Center.X - WidthC / 2, Center.Y); //Left
+            Point pointT = new Point(Center.X, Center.Y - HeightC / 2);
+            Point pointR = new Point(Center.X + WidthC / 2, Center.Y);
+            Point pointB = new Point(Center.X, Center.Y + HeightC / 2);
             PathFigure rectPathFigure = new PathFigure();
-            rectPathFigure.StartPoint = pointTL;
+            rectPathFigure.StartPoint = pointL;
             LineSegment topSegment = new LineSegment();
-            topSegment.Point = pointTR;
+            topSegment.Point = pointT;
             LineSegment rightSegment = new LineSegment();
-            rightSegment.Point = pointBR;
+            rightSegment.Point = pointR;
             LineSegment bottomSegment = new LineSegment();
-            bottomSegment.Point = pointBL;
+            bottomSegment.Point = pointB;
             LineSegment leftSegment = new LineSegment();
-            leftSegment.Point = pointTL;
+            leftSegment.Point = pointL;
             PathSegmentCollection segmentCollection = new PathSegmentCollection();
             segmentCollection.Add(topSegment);
             segmentCollection.Add(rightSegment);
@@ -67,16 +66,18 @@ namespace ShapesHandler.Models
             GeometryGroup geometryGroup = new GeometryGroup();
             geometryGroup.Children.Add(pathGeometry);
             EllipseGeometry centre = new EllipseGeometry(Center, 2.0f, 2.0f);
-            geometryGroup.Children.Add(centre); 
+            geometryGroup.Children.Add(centre);
+
             //Add Center Label
-            string centerLabel=null;
+            string centerLabel = null;
             if (this.IsCopy) centerLabel = "";
             else centerLabel = XLabel.ToString() + " , " + YLabel.ToString();
             FormattedText ft = new FormattedText(centerLabel, Thread.CurrentThread.CurrentCulture,
-            System.Windows.FlowDirection.LeftToRight, new Typeface("Times New Roman"), 13, Brushes.Black);
-            Geometry centerText = ft.BuildGeometry(new Point(Center.X,Center.Y-7.0f));
+            System.Windows.FlowDirection.LeftToRight, new Typeface("Times New Roman"), 12, Brushes.Black);
+            Geometry centerText = ft.BuildGeometry(new Point(Center.X, Center.Y - 12.0f));
             geometryGroup.Children.Add(centerText);
             //Add Name Label
+
             FormattedText ft2 = new FormattedText(Name, Thread.CurrentThread.CurrentCulture,
             System.Windows.FlowDirection.LeftToRight, new Typeface("Times New Roman"), 14, Brushes.Black);
             Geometry nameText = ft2.BuildGeometry(new Point(Center.X, Center.Y + HeightC / 2 + 3.0f));
@@ -84,6 +85,6 @@ namespace ShapesHandler.Models
 
             return geometryGroup;
         }
-        
+
     }
 }

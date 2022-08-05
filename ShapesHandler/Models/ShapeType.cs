@@ -12,7 +12,7 @@ namespace ShapesHandler.Models
         Triangle,
         Rectangle,
         Rhomb,
-        Hexagone,
+        Hexagon,
         Circle
     }
 }
