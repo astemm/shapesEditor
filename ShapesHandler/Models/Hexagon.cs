@@ -79,11 +79,11 @@ namespace ShapesHandler.Models
             geometryGroup.Children.Add(centre);
             //Add Center Label
             string centerLabel = null;
-            if (this.IsCopy) centerLabel = ""; 
-            else centerLabel = XLabel.ToString() + " , " + YLabel.ToString();
+            if (this.IsCopy) centerLabel = "";
+            else centerLabel = Math.Round((double)XLabel).ToString() + ", " + Math.Round((double)YLabel).ToString();
             FormattedText ft = new FormattedText(centerLabel, Thread.CurrentThread.CurrentCulture,
             System.Windows.FlowDirection.LeftToRight, new Typeface("Times New Roman"), 13, Brushes.Black);
-            Geometry centerText = ft.BuildGeometry(new Point(Center.X, Center.Y - 7.0f));
+            Geometry centerText = ft.BuildGeometry(new Point(Center.X, Center.Y - 13.0f));
             geometryGroup.Children.Add(centerText);
             //Add Name Label
             FormattedText ft2 = new FormattedText(Name, Thread.CurrentThread.CurrentCulture,

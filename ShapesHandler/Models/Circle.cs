@@ -77,7 +77,7 @@ namespace ShapesHandler.Models
             //Add Center Label
             string centerLabel = null;
             if (this.IsCopy) centerLabel = "";
-            else centerLabel = Math.Round((double)XLabel).ToString() + " , " + Math.Round((double)YLabel).ToString();
+            else centerLabel = Math.Round((double)XLabel).ToString() + ", " + Math.Round((double)YLabel).ToString();
             Trace.WriteLine(Center.X + " " + Center.Y);
             FormattedText ft = new FormattedText(centerLabel, Thread.CurrentThread.CurrentCulture,
             System.Windows.FlowDirection.LeftToRight, new Typeface("Times New Roman"), 13, Brushes.Black);
